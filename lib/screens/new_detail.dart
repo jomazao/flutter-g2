@@ -12,7 +12,8 @@ class NewDetail extends StatelessWidget {
       color: Color.fromRGBO(80, 80, 80, 1),
       fontWeight: FontWeight.w300,
     );
-
+    var size = MediaQuery.of(context).size;
+    var width = size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber,
@@ -76,7 +77,7 @@ class NewDetail extends StatelessWidget {
                       child: ClipOval(
                         child: Image.network(
                           'https://cdn.cienradios.com/wp-content/uploads/sites/3/2020/09/Nicol%C3%A1s-Maduro.jpg',
-                          height: 50,
+                          height: width * 0.08,
                         ),
                       ),
                     )
