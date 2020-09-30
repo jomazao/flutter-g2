@@ -4,6 +4,8 @@ import 'package:widgets_basicos/screens/map_screen.dart';
 import 'package:widgets_basicos/screens/rides_screen.dart';
 import 'package:widgets_basicos/screens/stories_screen.dart';
 
+import 'characters_screen.dart';
+
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class MainScreen extends StatelessWidget {
           bottom: TabBar(
             tabs: [
               Tab(
-                text: 'Rodadas',
+                text: 'Personajes',
               ),
               Tab(
                 text: 'Historias',
@@ -30,7 +32,7 @@ class MainScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            RidesScreen(),
+            CharactersScreen(),
             StoriesScreen(),
             MapScreen(),
           ],

@@ -1,32 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:widgets_basicos/models/character.dart';
 
-class RoadWidget extends StatelessWidget {
-  // Group info
-  final groupName;
-  final groupIcon;
+class CharacterWidget extends StatelessWidget {
+  final Character character;
 
-  //Road info
-  final date;
-  final route;
-  final start;
-  final difficult;
-  final distance;
-  final likes;
-  final comments;
-
-  const RoadWidget(
-      {Key key,
-      this.groupName,
-      this.groupIcon,
-      this.date,
-      this.route,
-      this.start,
-      this.difficult,
-      this.distance,
-      this.likes,
-      this.comments})
-      : super(key: key);
+  CharacterWidget({this.character});
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +21,11 @@ class RoadWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.network(
-                groupIcon,
+                character.photo,
                 height: 100,
               ),
               Text(
-                groupName,
+                character.name,
                 style: TextStyle(color: Colors.white),
               ),
             ],
@@ -67,7 +46,7 @@ class RoadWidget extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      date.toIso8601String(),
+                      character.race,
                       style: contentStyle,
                     ),
                   ),
@@ -82,11 +61,11 @@ class RoadWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Ruta:',
+                            'Ocupación:',
                             style: subTitleStyle,
                           ),
                           Text(
-                            route,
+                            character.occupation,
                             style: contentStyle,
                           ),
                         ],
@@ -95,11 +74,11 @@ class RoadWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Inicio:',
+                            'Edad:',
                             style: subTitleStyle,
                           ),
                           Text(
-                            start,
+                            '${character.age} años',
                             style: contentStyle,
                           ),
                         ],
@@ -108,11 +87,11 @@ class RoadWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Hora:',
+                            'Universo:',
                             style: subTitleStyle,
                           ),
                           Text(
-                            date.hour.toString(),
+                            'Universo-${character.universe}',
                             style: contentStyle,
                           ),
                         ],
@@ -121,19 +100,11 @@ class RoadWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Nivel de dificultad:',
+                            'Planeta:',
                             style: subTitleStyle,
                           ),
                           Text(
-                            '*' * difficult.toInt(),
-                            style: contentStyle,
-                          ),
-                          Text(
-                            'k.m:',
-                            style: subTitleStyle,
-                          ),
-                          Text(
-                            distance.toString(),
+                            character.origin,
                             style: contentStyle,
                           ),
                         ],
