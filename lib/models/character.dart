@@ -7,6 +7,7 @@ class Character {
   String origin;
   int age;
   String gender;
+  String description;
 
   Character({
     this.name,
@@ -17,5 +18,6 @@ class Character {
     this.origin,
     this.age,
     this.gender,
+    this.description,
   });
 }

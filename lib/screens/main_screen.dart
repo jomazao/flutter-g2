@@ -12,9 +12,23 @@ class MainScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        drawer: Drawer(),
+        drawer: Drawer(
+          child: Column(
+            children: [
+              DrawerHeader(
+                child: Image.asset('assets/images/logodbz.png'),
+              ),
+              Image.asset(
+                'assets/images/gogeta.gif',
+              )
+            ],
+          ),
+        ),
         appBar: AppBar(
-          title: Text('Biux'),
+          title: Text(
+            'Dragon Ball',
+            style: TextStyle(fontFamily: 'Saiyan-Sans', fontSize: 40),
+          ),
           bottom: TabBar(
             tabs: [
               Tab(
