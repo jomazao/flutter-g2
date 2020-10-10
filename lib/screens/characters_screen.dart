@@ -65,32 +65,11 @@ class CharactersScreen extends StatelessWidget {
             'https://i.pinimg.com/originals/e7/b6/ee/e7b6ee64b87b0b302cc0560882d80f8e.gif');
     return Center(
       child: ListView(
-        scrollDirection: Axis.horizontal,
+        // scrollDirection: Axis.horizontal,
         children: [
           CharacterWidget(
             character: character1,
           ),
-          CharacterWidget(
-            character: character1,
-          ),
-          CharacterWidget(
-            character: character2,
-          ),
-          CharacterWidget(
-            character: character3,
-          ),
-          CharacterWidget(
-            character: character3,
-          ),
-          CharacterWidget(
-            character: character3,
-          ),
-          CharacterWidget(
-            character: character3,
-          ),
-          CharacterWidget(
-            character: character4,
-          )
         ],
       ),
     );
