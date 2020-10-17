@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TrikiScreen extends StatefulWidget {
+  final String namePlayerOne;
+  final String namePlayerTwo;
+  final Function restartGame;
+
+  const TrikiScreen(
+      {Key key, this.namePlayerOne, this.namePlayerTwo, this.restartGame})
+      : super(key: key);
+
   @override
   TrikiScreenState createState() => TrikiScreenState();
 }
@@ -8,7 +16,11 @@ class TrikiScreen extends StatefulWidget {
 class TrikiScreenState extends State<TrikiScreen> {
   int actualPlayer;
   List<Map<String, int>> cells;
+  int win;
 
+  get nameActualPlayer =>
+      actualPlayer == 1 ? widget.namePlayerOne : widget.namePlayerTwo;
+  get nameWinner => win == 1 ? widget.namePlayerOne : widget.namePlayerTwo;
   @override
   void initState() {
     super.initState();
@@ -79,7 +91,7 @@ class TrikiScreenState extends State<TrikiScreen> {
                           ? 'X'
                           : '',
                   style: TextStyle(
-                      color: Colors.white,
+                      color: selected == 1 ? Colors.red : Colors.lightGreen,
                       fontSize: 50,
                       fontWeight: FontWeight.bold),
                 ),
@@ -112,7 +124,7 @@ class TrikiScreenState extends State<TrikiScreen> {
         ///////////
 
         Text(
-          'Turno del jugador $actualPlayer',
+          'Turno de $nameActualPlayer',
           style: TextStyle(fontSize: 30, color: Colors.white),
         )
       ],
@@ -120,14 +132,69 @@ class TrikiScreenState extends State<TrikiScreen> {
   }
 
   cellTapped(int cellNumber) {
-    print('Se tocó la celda numero $cellNumber');
     var cell = cells.firstWhere((item) => item['cellNumber'] == cellNumber);
-    cell['selected'] = actualPlayer;
-    if (actualPlayer == 1) {
-      actualPlayer = 2;
-    } else {
-      actualPlayer = 1;
+
+    if (cell['selected'] == null && win == null) {
+      cell['selected'] = actualPlayer;
+      if (actualPlayer == 1) {
+        actualPlayer = 2;
+      } else {
+        actualPlayer = 1;
+      }
+      setState(() {});
+      verifyWin();
     }
-    setState(() {});
+  }
+
+  verifyWin() {
+    var cellLeft = cells.any((cell) => cell['selected'] == null);
+    var cellByNumber = (int number) =>
+        cells.firstWhere((cell) => cell['cellNumber'] == number)['selected'];
+
+    if (cellByNumber(1) == cellByNumber(2) &&
+        cellByNumber(1) == cellByNumber(3)) {
+      win = cellByNumber(1);
+    } else if (cellByNumber(4) == cellByNumber(5) &&
+        cellByNumber(4) == cellByNumber(6)) {
+      win = cellByNumber(4);
+    } else if (cellByNumber(7) == cellByNumber(8) &&
+        cellByNumber(7) == cellByNumber(9)) {
+      win = cellByNumber(7);
+    } else if (cellByNumber(1) == cellByNumber(4) &&
+        cellByNumber(1) == cellByNumber(7)) {
+      win = cellByNumber(1);
+    } else if (cellByNumber(2) == cellByNumber(5) &&
+        cellByNumber(2) == cellByNumber(8)) {
+      win = cellByNumber(2);
+    } else if (cellByNumber(3) == cellByNumber(6) &&
+        cellByNumber(3) == cellByNumber(9)) {
+      win = cellByNumber(3);
+    } else if (cellByNumber(1) == cellByNumber(5) &&
+        cellByNumber(1) == cellByNumber(9)) {
+      win = cellByNumber(1);
+    } else if (cellByNumber(3) == cellByNumber(5) &&
+        cellByNumber(3) == cellByNumber(7)) {
+      win = cellByNumber(3);
+    }
+
+    if (win != null) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Juego terminado'),
+          content: Text('Ganó $nameWinner'),
+        ),
+      ).then((value) => widget.restartGame());
+    }
+
+    if (!cellLeft) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Juego terminado'),
+          content: Text('Empate'),
+        ),
+      ).then((value) => widget.restartGame());
+    }
   }
 }

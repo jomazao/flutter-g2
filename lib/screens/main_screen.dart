@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:widgets_basicos/screens/map_screen.dart';
 import 'package:widgets_basicos/screens/rides_screen.dart';
 import 'package:widgets_basicos/screens/stories_screen.dart';
+import 'package:widgets_basicos/screens/triki_home_screen.dart';
 import 'package:widgets_basicos/screens/triki_screen.dart';
 
 import 'characters_screen.dart';
@@ -39,7 +40,7 @@ class MainScreen extends StatelessWidget {
                 text: 'Historias',
               ),
               Tab(
-                text: 'Mapa',
+                text: 'Triki',
               ),
             ],
           ),
@@ -49,7 +50,7 @@ class MainScreen extends StatelessWidget {
           children: [
             CharactersScreen(),
             StoriesScreen(),
-            TrikiScreen(),
+            TrikiHomeScreen(),
           ],
         ),
         backgroundColor: Color.fromRGBO(30, 40, 71, 1),
